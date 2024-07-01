@@ -24,10 +24,10 @@ export default function RootLayout({ children }) {
   return (
     <html>
       <body
-        className={`${josefin.className} antialiased bg-primary-950 text-primary-100 min-h-screen flex flex-col`}
+        className={`${josefin.className} antialiased bg-primary-950 text-primary-100 min-h-screen flex flex-col relative`}
       >
         <Header />
-        <div className="flex-1 px-8 py-12">
+        <div className="flex-1 px-8 py-12 ">
           <main className="max-y-7xl mx-auto">{children}</main>
         </div>
       </body>
