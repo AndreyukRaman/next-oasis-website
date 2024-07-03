@@ -1,7 +1,11 @@
+import { unstable_noStore as noStore } from "next/cache";
+
 import CabinCard from "@/app/_components/CabinCard";
 import { getCabins } from "../_lib/data-service";
+import { Noto_Sans } from "next/font/google";
 
 async function CabinList() {
+  // noStore();
   const cabins = await getCabins();
 
   if (!cabins.length) return null;
