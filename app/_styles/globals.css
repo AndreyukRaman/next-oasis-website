@@ -32,7 +32,7 @@
 
 /* For data picker */
 
-.r {
+.rdp {
   --rdp-cell-size: 32px !important;
   --rdp-accent-color: theme("colors.accent.500") !important;
   --rdp-background-color: theme("colors.accent.600") !important;
