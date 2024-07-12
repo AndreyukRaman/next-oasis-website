@@ -70,12 +70,12 @@ export async function updateReservation(formData) {
   if (!guestBookingIds.includes(bookingId))
     throw new Error("You are not allowed update this booking");
 
-  const numGuests = formData.get("numGuests");
+  const numGuests = Number(formData.get("numGuests"));
   const booking = await getBooking(bookingId);
   const cabin = await getCabin(booking.cabinId);
   const maxCapacity = cabin.maxCapacity;
 
-  if (Number(numGuests) > maxCapacity) {
+  if (numGuests > maxCapacity && numGuests <= 0) {
     throw new Error("Number of guest is wrong");
   }
   const observations = formData.get("observations");
