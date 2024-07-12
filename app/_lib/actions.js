@@ -3,7 +3,12 @@
 import { revalidatePath } from "next/cache";
 import { auth, signIn, signOut } from "./auth";
 import { supabase } from "./supabase";
-import { getBookings, updateBooking } from "./data-service";
+import {
+  getBooking,
+  getBookings,
+  getCabin,
+  updateBooking,
+} from "./data-service";
 import { redirect } from "next/navigation";
 
 export async function updateGuest(formData) {
@@ -58,18 +63,28 @@ export async function updateReservation(formData) {
   const session = await auth();
   if (!session) throw new Error("You must be logged in");
 
+  const guestBookings = await getBookings(session.user.guestId);
+  const guestBookingIds = guestBookings.map((booking) => booking.id);
+  const bookingId = Number(formData.get("bookingId"));
+
+  if (!guestBookingIds.includes(bookingId))
+    throw new Error("You are not allowed update this booking");
+
   const numGuests = formData.get("numGuests");
+  const booking = await getBooking(bookingId);
+  const cabin = await getCabin(booking.cabinId);
+  const maxCapacity = cabin.maxCapacity;
+
+  if (Number(numGuests) > maxCapacity) {
+    throw new Error("Number of guest is wrong");
+  }
   const observations = formData.get("observations");
 
-  // TODO: add validation
   const updateData = { numGuests, observations };
 
-  const update = await updateBooking(
-    Number(formData.get("bookingId")),
-    updateData
-  );
+  const update = await updateBooking(bookingId, updateData);
 
   revalidatePath("/account/reservations");
-  revalidatePath(`/account/reservations/edit/${formData.get("bookingId")}`);
+  revalidatePath(`/account/reservations/edit/${bookingId}`);
   redirect("/account/reservations");
 }
