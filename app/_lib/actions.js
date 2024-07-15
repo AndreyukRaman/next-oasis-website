@@ -78,7 +78,7 @@ export async function updateReservation(formData) {
   if (numGuests > maxCapacity && numGuests <= 0) {
     throw new Error("Number of guest is wrong");
   }
-  const observations = formData.get("observations");
+  const observations = formData.get("observations").slice(0, 1000);
 
   const updateData = { numGuests, observations };
 
