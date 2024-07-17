@@ -46,14 +46,6 @@ export default async function Navigation() {
             </Link>
           )}
         </li>
-        <li>
-          <Link
-            href="/contact"
-            className="hover:text-accent-400 transition-colors"
-          >
-            Contact
-          </Link>
-        </li>
       </ul>
     </nav>
   );
