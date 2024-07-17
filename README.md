@@ -1,3 +1,11 @@
+Next.js Online Booking Website.
+
+Next 14, React Server Components, Auth.js with Google login, Supabase Postgres database, Context API, Vercel Deployment, Hybrid (SSG and SSR rendering), Server Actions
+
+**Website Demo: https://next-oasis-website.vercel.app/**
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
